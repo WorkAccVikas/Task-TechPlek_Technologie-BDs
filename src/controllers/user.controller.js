@@ -101,13 +101,13 @@ export const login = asyncHandler(async (req, res) => {
   // console.log(`🚀 ~ loginUser ~ user:`, user);
 
   if (!user) {
-    throw new ApiError(404, "User not found");
+    throw new ApiError(401, "Invalid credentials");
   }
 
   const isPasswordValid = await user.isPasswordCorrect(password);
 
   if (!isPasswordValid) {
-    throw new ApiError(401, "Invalid user credentials");
+    throw new ApiError(401, "Invalid credentials");
   }
 
   const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(
