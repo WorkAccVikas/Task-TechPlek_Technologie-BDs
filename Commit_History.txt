@@ -1,2 +1,5 @@
 1. Add Following : 
     - All API Routes implemented with proper authentication with jwt (Refresh and Access Token)
+
+2. Add Following : 
+    - Add error middleware

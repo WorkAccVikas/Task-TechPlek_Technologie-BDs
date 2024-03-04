@@ -8,3 +8,6 @@
     - If we pass query parameter (as our situation, Here, username) then it will call controller 
     - If we don't pass any query parameter (as our situation, Here, username) then it will pass to middlewares and then controller
         - see user.route.js -> Route "/"
+
+4. When refresh token is expired then clear both cookies (accessToken, refreshToken)
+    - see user.controller.js -> newAccessToken

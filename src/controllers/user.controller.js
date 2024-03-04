@@ -341,7 +341,7 @@ export const newAccessToken = asyncHandler(async (req, res) => {
       );
   } catch (error) {
     // console.log("Error aala = ", error);
-
+    // LEARN : When refresh token is expired then clear both cookies (accessToken, refreshToken)
     if (error instanceof jwt.TokenExpiredError) {
       res
         .clearCookie("accessToken", SECURE_COOKIE_OPTION)
