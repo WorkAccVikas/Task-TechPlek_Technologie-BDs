@@ -6,3 +6,6 @@
 
 3. Add Following : 
     - Change error message in "/login" route
+
+4. Add Following : 
+    - bug fixed : "/user/:id" delete when admin delete any existing user it will delete user but it will delete both cookies

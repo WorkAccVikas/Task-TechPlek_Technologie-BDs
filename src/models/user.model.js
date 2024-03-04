@@ -56,7 +56,8 @@ const userSchema = new Schema(
     },
     state: {
       type: String,
-      set: (value) => value.charAt(0).toUpperCase() + value.slice(1), // Capitalize the first letter
+      set: (value) =>
+        value?.charAt(0)?.toUpperCase() + value?.slice(1) || undefined,
     },
   },
   { timestamps: true }

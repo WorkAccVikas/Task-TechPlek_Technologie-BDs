@@ -33,8 +33,8 @@ const generateAccessAndRefreshTokens = async (userId) => {
 
 export const register = asyncHandler(async (req, res) => {
   console.log("Register Route");
-  const { username, email, password, role } = req.body;
-  console.table({ username, email, password, role });
+  const { username, email, password, role, contact, state } = req.body;
+  console.table({ username, email, password, role, contact, state });
 
   if (
     ![username, email, password].every((field) => field && field.trim() !== "")
@@ -56,6 +56,8 @@ export const register = asyncHandler(async (req, res) => {
     password,
     username,
     role,
+    contact,
+    state,
   });
 
   const createdUser = await User.findById(user._id).select(
@@ -271,11 +273,25 @@ export const deleteUserRecord = asyncHandler(async (req, res) => {
   }
 
   if (result.status) {
+    // return res
+    //   .status(200)
+    //   .clearCookie("accessToken", SECURE_COOKIE_OPTION)
+    //   .clearCookie("refreshToken", SECURE_COOKIE_OPTION)
+    //   .json(new ApiResponse(200, {}, "User Deleted Successfully"));
+
+    if (!id) {
+      // Delete own record => delete both cookies
+      return res
+        .status(200)
+        .clearCookie("accessToken", SECURE_COOKIE_OPTION)
+        .clearCookie("refreshToken", SECURE_COOKIE_OPTION)
+        .json(new ApiResponse(200, {}, "User Deleted Successfully"));
+    }
+
+    // Delete other record (by admin) => don't delete any cookies
     return res
       .status(200)
-      .clearCookie("accessToken", SECURE_COOKIE_OPTION)
-      .clearCookie("refreshToken", SECURE_COOKIE_OPTION)
-      .json(new ApiResponse(200, {}, "User Deleted Successfully"));
+      .json(new ApiResponse(200, {}, "User Deleted Successfully (by Admin)"));
   } else {
     throw new ApiError(result.statusCode, result.message);
   }

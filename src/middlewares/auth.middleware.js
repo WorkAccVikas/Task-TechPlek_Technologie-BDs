@@ -12,7 +12,7 @@ export const verifyJWT = asyncHandler(async (req, res, next) => {
      *  - for mobile = header
      *  */
     console.log("verifyJWT middleware");
-    console.log(req.cookies);
+    console.log("cookies = ", req.cookies);
     const token =
       req.cookies?.accessToken ||
       req.header("Authorization")?.replace("Bearer ", "");
