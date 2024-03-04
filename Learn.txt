@@ -1,0 +1,10 @@
+1. We need to run manually validation when we use findByIdAndUpdate 
+    - see user.controller.js -> updateAccountDetails
+
+2. Check valid mongodb id pass by user 
+    - see helpers.js -> isValidObjectId
+
+3. For same Route 
+    - If we pass query parameter (as our situation, Here, username) then it will call controller 
+    - If we don't pass any query parameter (as our situation, Here, username) then it will pass to middlewares and then controller
+        - see user.route.js -> Route "/"
