@@ -307,8 +307,16 @@ export const getCurrentUser = asyncHandler(async (req, res) => {
 export const newAccessToken = asyncHandler(async (req, res) => {
   try {
     console.log("newAccessToken Route");
+    console.log("ck = ", req.cookies);
+    console.log("headers = ", req.header("Authorization"));
+    console.log("Vikas = ", req.header);
+    console.log("Rani = ", req.headers);
+    console.log("body = ", req.body);
+
     const incomingRefreshToken =
-      req.cookies.refreshToken || req.body.refreshToken;
+      req.cookies?.refreshToken ||
+      req.header("Authorization")?.replace("Bearer ", "") ||
+      req.body.refreshToken;
 
     console.log(
       `🚀 ~ newAccessToken ~ incomingRefreshToken:`,
@@ -347,7 +355,10 @@ export const newAccessToken = asyncHandler(async (req, res) => {
 
     return res
       .status(200)
-      .cookie("accessToken", newAccessToken, SECURE_COOKIE_OPTION)
+      .cookie("accessToken", newAccessToken, {
+        ...SECURE_COOKIE_OPTION,
+        expires: new Date(Date.now() + ACCESS_TOKEN_EXPIRY_TIME),
+      })
       .json(
         new ApiResponse(
           200,

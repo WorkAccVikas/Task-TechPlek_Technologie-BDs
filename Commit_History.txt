@@ -2,10 +2,14 @@
     - All API Routes implemented with proper authentication with jwt (Refresh and Access Token)
 
 2. Add Following : 
-    - Add error middleware
+    - Add error middleware  
 
 3. Add Following : 
     - Change error message in "/login" route
 
 4. Add Following : 
     - bug fixed : "/user/:id" delete when admin delete any existing user it will delete user but it will delete both cookies
+
+5. Add Following : 
+    - change http request : "/newAccessToken" from GET -> POST
+    - add expiry to accessToken cookie in newAccessToken

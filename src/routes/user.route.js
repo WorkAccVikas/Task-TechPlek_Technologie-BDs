@@ -18,7 +18,7 @@ router.route("/register").post(register);
 
 router.route("/login").post(login);
 
-router.route("/newAccessToken").get(newAccessToken);
+router.route("/newAccessToken").post(newAccessToken);
 
 // PROTECTED ROUTES
 router
